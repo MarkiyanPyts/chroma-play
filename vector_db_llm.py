@@ -23,9 +23,9 @@ collection = chroma_client.get_or_create_collection(
 client = OpenAI(api_key=openai_key)
 
 
-# =================================
-# === For initial setup -- Uncomment (below) all for the first run, and then comment it all out ===
-# =================================
+# # =================================
+# # === For initial setup -- Uncomment (below) all for the first run, and then comment it all out ===
+# # =================================
 # Function to load documents from a directory
 def load_documents_from_directory(directory_path):
     print("==== Loading documents from directory ====")
@@ -93,9 +93,11 @@ for doc in chunked_documents:
 def query_documents(question, n_results=2):
     # query_embedding = get_openai_embedding(question)
     results = collection.query(query_texts=question, n_results=n_results)
-
     # Extract the relevant chunks
-    relevant_chunks = [doc for sublist in results["documents"] for doc in sublist]
+    # Flatten the list of document chunks from the query results
+    relevant_chunks = []
+    for document_list in results["documents"]:
+        relevant_chunks.extend(document_list)
     print("==== Returning relevant chunks ====")
     return relevant_chunks
     # for idx, document in enumerate(results["documents"][0]):
