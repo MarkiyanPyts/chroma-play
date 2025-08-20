@@ -22,3 +22,9 @@ query = "Hello, world !"
 results = collection.query(query_texts=[query], n_results=2)
 
 print(results)
+
+for idx, documents in enumerate(results["documents"][0]):
+    print(f"Document {idx}:")
+    doc_id = results['ids'][0][idx]
+    distance = results['distances'][0][idx]
+    print(f"For the query '{query}', found document {doc_id} with a distance of {distance}.")
