@@ -99,6 +99,8 @@ def query_documents(question, n_results=2):
     for document_list in results["documents"]:
         relevant_chunks.extend(document_list)
     print("==== Returning relevant chunks ====")
+    print(f"Found {len(relevant_chunks)} relevant chunks.")
+    print(relevant_chunks)
     return relevant_chunks
     # for idx, document in enumerate(results["documents"][0]):
     #     doc_id = results["ids"][0][idx]
